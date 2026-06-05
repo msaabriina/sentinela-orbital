@@ -1,0 +1,36 @@
+{
+  "regressao": {
+    "linear": {
+      "r2": 0.484,
+      "rmse": 25.6
+    },
+    "random_forest": {
+      "r2": 0.964,
+      "rmse": 6.8,
+      "mae": 4.5
+    }
+  },
+  "classificacao": {
+    "acuracia": 0.911,
+    "f1_macro": 0.903,
+    "importancias": {
+      "t2m": 0.1711,
+      "t2m_max": 0.2087,
+      "rh2m": 0.1839,
+      "prectotcorr": 0.2061,
+      "ws2m": 0.0423,
+      "dias_sem_chuva": 0.1544,
+      "vegetacao": 0.0336
+    }
+  },
+  "atributos": [
+    "t2m",
+    "t2m_max",
+    "rh2m",
+    "prectotcorr",
+    "ws2m",
+    "dias_sem_chuva",
+    "vegetacao"
+  ],
+  "n_registros": 2196
+}

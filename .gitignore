@@ -1,0 +1,37 @@
+# =============================================================================
+# SENTINELA ORBITAL - .gitignore
+# =============================================================================
+
+# Ambientes virtuais (NUNCA versionar / NUNCA compactar no envio)
+venv/
+.venv/
+env/
+ENV/
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Banco de dados gerado em tempo de execucao
+dados/sentinela.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Arquivos temporarios
+*.log
+*.tmp
