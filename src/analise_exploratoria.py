@@ -158,14 +158,44 @@ def fig_risco_mensal(clima: pd.DataFrame) -> None:
 # Figura 5 - Mapa geografico dos focos (dispersao sobre o Brasil)
 # ---------------------------------------------------------------------------
 def fig_mapa_focos(focos: pd.DataFrame) -> None:
-    # amostra para nao poluir o grafico
-    amostra = focos.sample(min(8000, len(focos)), random_state=7)
+    from matplotlib.path import Path as _Path
+
+    # Contorno simplificado do Brasil (longitude, latitude). Serve para dar a
+    # forma do territorio ao mapa e para recortar os focos que, por serem
+    # sorteados em caixas retangulares por bioma, cairiam no mar ou em paises
+    # vizinhos.
+    BR = [
+        (-60.0, 5.2), (-63.2, 3.9), (-64.5, 4.1), (-67.0, 2.5), (-69.8, 1.1),
+        (-69.5, -1.0), (-70.0, -4.3), (-72.9, -9.4), (-73.9, -7.6), (-72.3, -9.9),
+        (-70.6, -11.0), (-65.3, -9.8), (-61.9, -13.5), (-60.0, -16.3),
+        (-58.2, -17.8), (-57.9, -20.5), (-57.9, -22.4), (-55.0, -24.0),
+        (-54.5, -25.6), (-55.6, -27.4), (-56.0, -28.5), (-57.6, -30.2),
+        (-57.2, -31.0), (-55.6, -31.1), (-53.1, -32.7), (-53.4, -33.7),
+        (-51.1, -30.2), (-48.6, -28.5), (-48.5, -25.9), (-46.3, -24.0),
+        (-43.2, -23.0), (-41.0, -21.6), (-40.3, -20.3), (-39.7, -18.3),
+        (-39.0, -16.4), (-37.4, -11.5), (-35.4, -9.6), (-34.8, -7.1),
+        (-35.2, -5.8), (-37.3, -4.9), (-38.5, -3.7), (-41.5, -2.8),
+        (-44.3, -2.5), (-46.5, -0.9), (-48.5, -0.7), (-50.0, -0.1),
+        (-50.2, 1.9), (-51.3, 4.1), (-52.7, 2.2), (-54.6, 2.3),
+        (-56.5, 1.9), (-58.9, 1.2), (-60.3, 1.4), (-62.8, 2.0), (-63.4, 3.9),
+    ]
+    contorno = _Path(np.array(BR))
+    xs = [p[0] for p in BR] + [BR[0][0]]
+    ys = [p[1] for p in BR] + [BR[0][1]]
+
+    # amostra generosa e recorte ao territorio nacional
+    amostra = focos.sample(min(12000, len(focos)), random_state=7).copy()
+    dentro = contorno.contains_points(amostra[["longitude", "latitude"]].to_numpy())
+    amostra = amostra[dentro]
+
     fig, ax = plt.subplots(figsize=(7.6, 7.6))
+    ax.fill(xs, ys, color="#FBF7F4", zorder=0)              # massa de terra
+    ax.plot(xs, ys, color=ev.CINZA, linewidth=1.2, zorder=1)  # contorno do Brasil
     for bioma in amostra["bioma"].unique():
         sub = amostra[amostra["bioma"] == bioma]
-        ax.scatter(sub["longitude"], sub["latitude"], s=6, alpha=0.35,
+        ax.scatter(sub["longitude"], sub["latitude"], s=6, alpha=0.45,
                    color=ev.CORES_BIOMA.get(bioma, ev.LARANJA), label=bioma,
-                   edgecolors="none")
+                   edgecolors="none", zorder=2)
     ax.set_xlabel("Longitude")
     ax.set_ylabel("Latitude")
     ax.set_xlim(-74, -33)
@@ -175,7 +205,7 @@ def fig_mapa_focos(focos: pd.DataFrame) -> None:
                     title="Bioma", title_fontsize=9)
     leg.get_title().set_color(ev.GRAFITE)
     ev.titulo_painel(ax, "Mapa de focos de calor - Brasil",
-                     "Cada ponto e uma deteccao orbital (amostra de 8.000 focos)")
+                     "Cada ponto e uma deteccao orbital, recortada ao territorio nacional")
     plt.tight_layout()
     plt.savefig(os.path.join(PASTA_ASSETS, "05_mapa_focos_brasil.png"))
     plt.close()
