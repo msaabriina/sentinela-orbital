@@ -221,12 +221,6 @@ def desenhar_capa(c, doc):
     c.drawString(60, H - 257, "Previsão e monitoramento inteligente de queimadas com dados")
     c.drawString(60, H - 275, "orbitais (INPE e NASA), inteligência artificial e sensores ESP32")
 
-    c.setFillColor(LARANJA)
-    c.roundRect(60, H - 332, 232, 34, 7, fill=1, stroke=0)
-    c.setFillColor(BRANCO)
-    c.setFont("Helvetica-Bold", 15)
-    c.drawString(78, H - 322, "QUERO CONCORRER")
-
     c.setStrokeColor(colors.HexColor("#33333F"))
     c.setLineWidth(1)
     c.line(60, H - 360, W - 60, H - 360)
@@ -255,6 +249,14 @@ def desenhar_capa(c, doc):
         c.setFillColor(colors.HexColor("#8C8C97"))
         c.drawRightString(W - 60, y, rm)
         y -= 23
+
+    # "QUERO CONCORRER" posicionado logo APOS os nomes dos integrantes
+    y -= 6
+    c.setFillColor(LARANJA)
+    c.roundRect(60, y - 26, 232, 34, 7, fill=1, stroke=0)
+    c.setFillColor(BRANCO)
+    c.setFont("Helvetica-Bold", 15)
+    c.drawString(78, y - 16, "QUERO CONCORRER")
 
     c.setStrokeColor(colors.HexColor("#33333F"))
     c.line(60, 96, W - 60, 96)

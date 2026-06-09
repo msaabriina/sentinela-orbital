@@ -1,3 +1,13 @@
+# FIAP, Faculdade de Informática e Administração Paulista
+
+<p align="center">
+  <a href="https://www.fiap.com.br/">
+    <img src="assets/logo-fiap.png" alt="FIAP, Faculdade de Informática e Administração Paulista" border="0" width="40%" height="40%">
+  </a>
+</p>
+
+<br>
+
 # Sentinela Orbital
 
 ### Previsão e monitoramento inteligente de queimadas combinando dados orbitais, IA climática e sensores de borda (ESP32)
@@ -5,32 +15,38 @@
 > **Global Solution 2026.1, FIAP**
 > Tema: *Como a tecnologia espacial pode melhorar a vida das pessoas, tornar processos mais eficientes e criar novas oportunidades na Terra.*
 
+## Nome do grupo: Sentinela Orbital
+
+> **QUERO CONCORRER.** Este projeto está concorrendo à premiação (pódio) da Global Solution 2026.1.
+
+## 👨‍🎓 Integrantes
+
+- Karina Garta Szewczuk (RM569309)
+- Maria Sabrina Feitosa da Silva (RM568714)
+- Nicolas Lima Apolinário (RM570741)
+- Roger Gabriel de Souza Jesus Costa (RM573659)
+
+## 👩‍🏫 Professores
+
+### Tutora
+
+- Sabrina Otoni
+
+### Coordenador
+
+- Andre Godoi
+
 ---
 
-## QUERO CONCORRER
+## 📜 Descrição
 
-Este projeto está concorrendo à premiação (pódio) da Global Solution 2026.1.
-
----
-
-## Integrantes
-
-| Nome completo | RM |
-|---|---|
-| Karina Garta Szewczuk | RM569309 |
-| Maria Sabrina Feitosa da Silva | RM568714 |
-| Nicolas Lima Apolinário | RM570741 |
-| Roger Gabriel de Souza Jesus Costa | RM573659 |
-
----
-
-## O problema
+### O problema
 
 O Brasil registra **centenas de milhares de focos de calor por ano**, concentrados na estação seca (julho a outubro) e nos biomas Amazônia e Cerrado. Os satélites do INPE detectam o fogo com excelência, mas detectam o fogo **que já começou**, e muitas vezes com horas de defasagem entre a passagem do satélite e a chegada do alerta a quem pode agir.
 
 **A pergunta que guia o projeto:** e se pudéssemos *prever* o risco antes do fogo e *confirmar* o início da queimada no chão, em minutos?
 
-## A solução
+### A solução
 
 O **Sentinela Orbital** integra três camadas de informação em um único sistema de previsão e alerta:
 
@@ -42,9 +58,7 @@ Um **motor de fusão** combina as três camadas em um score de 0 a 100 por bioma
 
 ![Arquitetura do sistema](assets/11_arquitetura.png)
 
----
-
-## Como funciona
+### Como funciona
 
 ```
 Satélites INPE  ─┐
@@ -60,13 +74,9 @@ Estações ESP32  ─┘      ▲                          (Random Forest)  │
                                               (Streamlit + Plotly)         (VERDE→VERMELHO)
 ```
 
-### O dashboard
-
 ![Dashboard](assets/10_painel_dashboard.png)
 
----
-
-## Resultados
+### Resultados
 
 Os modelos foram treinados sobre o cruzamento clima × focos (pares bioma/dia):
 
@@ -83,9 +93,7 @@ As variáveis mais decisivas para o risco, temperatura máxima, precipitação, 
 |---|---|
 | ![Importância](assets/07_importancia_variaveis.png) | ![Matriz](assets/08_matriz_confusao.png) |
 
----
-
-## Tecnologias utilizadas
+### Tecnologias utilizadas
 
 | Camada | Tecnologias |
 |---|---|
@@ -101,36 +109,37 @@ As variáveis mais decisivas para o risco, temperatura máxima, precipitação, 
 
 ---
 
-## Estrutura do repositório
+## 📁 Estrutura de pastas
 
 ```
 sentinela-orbital/
 ├── README.md                  # este arquivo
 ├── requirements.txt           # dependências
-├── src/                       # código-fonte (ver src/README.md)
-│   ├── gerar_dados.py             # gera as bases sintéticas realistas
-│   ├── estilo_viz.py              # identidade visual dos gráficos
-│   ├── analise_exploratoria.py    # EDA + gráficos
-│   ├── modelo_risco.py            # treino dos modelos de ML
-│   ├── ingestao_dados.py          # integração com APIs INPE/NASA (+ fallback)
-│   ├── mqtt_receptor.py           # recebe telemetria ESP32 e aplica a IA
-│   ├── motor_alertas.py           # funde as 3 camadas e gera alertas
-│   ├── dashboard.py               # dashboard Streamlit + Plotly
-│   ├── gerar_preview_dashboard.py # imagem do dashboard p/ documentação
-│   └── gerar_arquitetura.py       # diagramas de arquitetura
+├── assets/                    # gráficos, diagramas e a logo da FIAP
+├── dados/                     # bases geradas (CSV) + banco SQLite
+├── docs/                      # arquitetura da solução
 ├── firmware/                  # código do ESP32 (ver firmware/README.md)
 │   ├── sentinela_esp32.ino        # firmware Arduino C++
 │   ├── sentinela_esp32_micropython.py
 │   └── README.md
-├── dados/                     # bases geradas (CSV) + banco SQLite
 ├── modelos/                   # modelos treinados (.joblib) + métricas
-├── assets/                    # gráficos e diagramas
-└── docs/                      # arquitetura e roteiro do vídeo
+└── src/                       # código-fonte (ver src/README.md)
+    ├── gerar_dados.py             # gera as bases sintéticas realistas
+    ├── estilo_viz.py              # identidade visual dos gráficos
+    ├── analise_exploratoria.py    # EDA + gráficos
+    ├── modelo_risco.py            # treino dos modelos de ML
+    ├── ingestao_dados.py          # integração com APIs INPE/NASA (+ fallback)
+    ├── mqtt_receptor.py           # recebe telemetria ESP32 e aplica a IA
+    ├── motor_alertas.py           # funde as 3 camadas e gera alertas
+    ├── dashboard.py               # dashboard Streamlit + Plotly
+    ├── gerar_preview_dashboard.py # imagem do dashboard p/ documentação
+    ├── gerar_arquitetura.py       # diagramas de arquitetura
+    └── gerar_pdf.py               # gera o PDF oficial da entrega
 ```
 
 ---
 
-## Como executar
+## 🔧 Como executar o código
 
 > Pré-requisito: **Python 3.10+**. Recomenda-se um ambiente virtual.
 
@@ -174,9 +183,7 @@ Por se tratar de uma POC acadêmica executada **sem acesso garantido às APIs ex
 
 O código em `firmware/` é **real e compilável** na Arduino IDE / PlatformIO. Como a banca pode não dispor do hardware, o módulo `mqtt_receptor.py --sim` reproduz fielmente o fluxo de telemetria a partir dos dados das estações, permitindo testar todo o sistema ponta a ponta sem placa física.
 
----
-
-## Vídeo demonstrativo
+### Vídeo demonstrativo
 
 [LINK DO VÍDEO NO YOUTUBE, NÃO LISTADO]
 
@@ -184,6 +191,21 @@ O código em `firmware/` é **real e compilável** na Arduino IDE / PlatformIO. 
 
 ---
 
-## Licença e créditos
+## 🗃 Histórico de lançamentos
+
+- 0.1.0, 9 de junho de 2026: versão inicial da entrega da Global Solution 2026.1 (pipeline completo de dados, modelos de IA, firmware ESP32, motor de fusão e dashboard).
+
+---
+
+## 📋 Licença
+
+<p align="center">
+  <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">
+    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="22" alt="CC">
+    <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="22" alt="BY">
+  </a>
+</p>
 
 Projeto acadêmico desenvolvido para a Global Solution 2026.1 da FIAP. Dados de referência inspirados no **Programa Queimadas/INPE** e na **NASA POWER**.
+
+Este projeto segue o modelo de repositório da FIAP e está licenciado sob [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1).
