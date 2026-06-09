@@ -185,9 +185,9 @@ O código em `firmware/` é **real e compilável** na Arduino IDE / PlatformIO. 
 
 ### Vídeo demonstrativo
 
-[LINK DO VÍDEO NO YOUTUBE, NÃO LISTADO]
+https://youtu.be/4-Zld16HQtE
 
-> Substitua pelo link do vídeo (≤ 5 min, configurado como **Não listado**).
+> Vídeo demonstrativo (até 5 min), configurado como **Não listado** no YouTube.
 
 ---
 

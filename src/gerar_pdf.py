@@ -630,7 +630,7 @@ def construir():
     S.append(Paragraph("https://github.com/msaabriina/sentinela-orbital",
                        st_quote))
     S.append(p("<b>Vídeo demonstrativo (YouTube, Não listado, até 5 min):</b>"))
-    S.append(Paragraph("[INSIRA AQUI O LINK DO VÍDEO NO YOUTUBE]", st_quote))
+    S.append(Paragraph("https://youtu.be/4-Zld16HQtE", st_quote))
     S.append(p(
         "<i>Lembre-se de configurar o vídeo como 'Não listado' e de preencher os "
         "nomes e RMs dos integrantes na capa deste documento e no README do "
